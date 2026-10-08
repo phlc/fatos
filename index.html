@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#5b3cc4">
+  <meta name="description" content="Fatos: um jogo para crianças praticarem adição, subtração, multiplicação e divisão.">
+  <title>Fatos – Jogo de Matemática</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="bubbles" aria-hidden="true">
+    <span>1</span><span>+</span><span>7</span><span>×</span><span>3</span>
+    <span>÷</span><span>9</span><span>−</span><span>5</span><span>=</span>
+  </div>
+
+  <header class="topbar">
+    <h1 class="logo"><span class="logo-icon">★</span>Fatos</h1>
+
+    <nav class="menu" aria-label="Operações">
+      <div class="ops" role="group" aria-label="Escolha as operações">
+        <button class="op op-add" data-op="add" aria-pressed="false">
+          <span class="op-symbol">+</span><span class="op-label">Adição</span>
+        </button>
+        <button class="op op-sub" data-op="sub" aria-pressed="false">
+          <span class="op-symbol">−</span><span class="op-label">Subtração</span>
+        </button>
+        <button class="op op-mul" data-op="mul" aria-pressed="false">
+          <span class="op-symbol">×</span><span class="op-label">Multiplicação</span>
+        </button>
+        <button class="op op-div" data-op="div" aria-pressed="false">
+          <span class="op-symbol">÷</span><span class="op-label">Divisão</span>
+        </button>
+      </div>
+      <button id="start" class="start" disabled>▶ Começar</button>
+    </nav>
+  </header>
+
+  <section class="status" aria-live="polite">
+    <div class="pill timer" title="Tempo">
+      <span class="pill-icon">⏱</span><span id="timer">00:00</span>
+    </div>
+    <div class="pill progress" title="Fatos">
+      <span class="pill-icon">⭐</span><span id="progress">0 / 0</span>
+    </div>
+    <button id="pause" class="pill pause" disabled aria-pressed="false">
+      <span class="pill-icon" id="pause-icon">⏸</span><span id="pause-label">Pausar</span>
+    </button>
+  </section>
+
+  <div class="bar" aria-hidden="true"><div id="bar-fill" class="bar-fill"></div></div>
+
+  <main id="stage" class="stage" tabindex="0">
+    <div id="card" class="card">
+      <div id="welcome" class="screen">
+        <div class="mascot">🦉</div>
+        <h2>Olá! Vamos praticar?</h2>
+        <p>Escolha uma ou mais operações lá em cima e toque em <strong>Começar</strong>.</p>
+      </div>
+
+      <div id="play" class="screen hidden">
+        <div id="fact" class="fact">
+          <span id="question"></span>
+          <span id="answer" class="answer"></span>
+        </div>
+        <p id="hint" class="hint">Toque na tela para ver a resposta</p>
+      </div>
+
+      <div id="paused" class="screen hidden">
+        <div class="mascot">😴</div>
+        <h2>Pausado</h2>
+        <p>Toque em <strong>Continuar</strong> quando estiver pronto.</p>
+      </div>
+
+      <div id="done" class="screen hidden">
+        <div class="mascot">🏆</div>
+        <h2>Parabéns!</h2>
+        <p>Você praticou <strong id="done-count">0</strong> fatos em <strong id="done-time">00:00</strong>.</p>
+        <p>Toque em <strong>Reiniciar</strong> para jogar de novo.</p>
+      </div>
+    </div>
+  </main>
+
+  <div id="confetti" class="confetti" aria-hidden="true"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
