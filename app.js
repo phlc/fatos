@@ -51,14 +51,17 @@
   var questionEl = $("question");
   var answerEl = $("answer");
   var hintEl = $("hint");
-  var screens = { welcome: $("welcome"), play: $("play"), paused: $("paused"), done: $("done") };
+  var screens = { welcome: $("welcome"), play: $("play"), paused: $("paused"), done: $("done"),
+    countdown: $("countdown") };
+  var countEl = $("count");
 
   // ---------- State ----------
   var selected = loadSelection();
   var deck = [];
   var index = -1;
   var revealed = false;
-  var state = "idle"; // idle | playing | paused | done
+  var state = "idle"; // idle | countdown | playing | paused | done
+  var countdownId = null;
   var elapsed = 0;
   var startedAt = 0;
   var tickId = null;
@@ -158,8 +161,39 @@
   }
 
   // ---------- Game flow ----------
+  // Começar/Reiniciar: zera tudo e mostra uma contagem "3, 2, 1, Já!" antes do primeiro fato.
   function startGame() {
     if (selected.length === 0) return;
+    stopClock();
+    clearInterval(countdownId);
+    elapsed = 0;
+    deck = [];
+    index = -1;
+    revealed = false;
+    state = "countdown";
+    renderTimer();
+    renderProgress();
+    renderControls();
+
+    var n = 3;
+    function step() {
+      countEl.textContent = n > 0 ? String(n) : "Já!";
+      show("countdown");
+      countEl.classList.remove("tick");
+      void countEl.offsetWidth; // reinicia a animação
+      countEl.classList.add("tick");
+    }
+    step();
+    countdownId = setInterval(function () {
+      n--;
+      if (n >= 0) { step(); return; }
+      clearInterval(countdownId);
+      countdownId = null;
+      playGame();
+    }, 700);
+  }
+
+  function playGame() {
     deck = [];
     ORDER.forEach(function (op) {
       if (selected.indexOf(op) !== -1) deck = deck.concat(factsFor(op));
@@ -180,6 +214,8 @@
   }
 
   function resetToIdle() {
+    clearInterval(countdownId);
+    countdownId = null;
     stopClock();
     state = "idle";
     elapsed = 0;

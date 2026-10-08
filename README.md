@@ -10,7 +10,8 @@ tablet e no celular.
 
 1. No menu de cima, escolha uma ou mais operações: **Adição (+)**, **Subtração (−)**,
    **Multiplicação (×)** e **Divisão (÷)**. Elas podem ser combinadas à vontade.
-2. Toque em **Começar**. O botão vira **Reiniciar**.
+2. Toque em **Começar**. Depois de uma contagem "3, 2, 1, Já!", o jogo começa
+   e o botão vira **Reiniciar**, que zera o tempo e embaralha os fatos de novo.
 3. Aparece um fato, por exemplo `4 + 3 =`. Toque ou clique na tela para ver a
    resposta: `4 + 3 = 7`.
 4. Toque de novo para ir ao próximo fato.
