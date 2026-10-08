@@ -92,7 +92,8 @@ button:disabled { cursor: not-allowed; }
   align-items: center;
   gap: 6px;
 }
-.logo-icon { color: var(--start); display: inline-block; animation: spin 6s linear infinite; }
+.icon { width: 1em; height: 1em; flex: none; vertical-align: -0.125em; }
+.logo-icon { width: 0.9em; height: 0.9em; animation: spin 6s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
 
 .menu {
@@ -140,6 +141,10 @@ button:disabled { cursor: not-allowed; }
 .op[aria-pressed="true"] .op-symbol { animation: pop 0.3s; }
 
 .start {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   min-width: 140px;
   padding: 8px 20px;
   border-radius: 20px;
@@ -187,7 +192,7 @@ button:disabled { cursor: not-allowed; }
   box-shadow: 0 5px 0 rgba(0, 0, 0, 0.15);
   font-variant-numeric: tabular-nums;
 }
-.pill-icon { font-size: 1.2rem; }
+.pill-icon { width: 1.3rem; height: 1.3rem; }
 
 .pause { transition: transform 0.12s, background 0.2s, opacity 0.2s; }
 .pause:not(:disabled):hover { transform: translateY(-2px); }
@@ -243,7 +248,7 @@ button:disabled { cursor: not-allowed; }
 .screen { animation: pop 0.35s ease; }
 .screen h2 { margin: 0.2em 0; font-size: clamp(1.8rem, 5vw, 2.8rem); color: var(--bg1); }
 .screen p  { margin: 0.3em 0; font-size: clamp(1.1rem, 3vw, 1.5rem); }
-.mascot { font-size: clamp(4rem, 14vw, 7rem); line-height: 1; animation: bob 2s ease-in-out infinite; }
+.mascot { display: block; margin: 0 auto; width: clamp(5rem, 22vw, 9rem); height: auto; overflow: visible; animation: bob 2s ease-in-out infinite; }
 
 @keyframes bob { 50% { transform: translateY(-10px); } }
 
@@ -325,7 +330,7 @@ button:disabled { cursor: not-allowed; }
   .op-symbol { font-size: 1.4rem; }
   .card { min-height: 0; padding: 12px; }
   .fact { font-size: clamp(2.6rem, 11vw, 5rem); }
-  .mascot { font-size: 3rem; }
+  .mascot { width: 4rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {

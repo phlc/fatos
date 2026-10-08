@@ -12,13 +12,37 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <!-- Ícones e mascote desenhados para este projeto (MIT). -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="i-star" viewBox="0 0 120 120">
+        <polygon points="60.0,16.0 74.7,43.8 105.7,49.2 83.8,71.7 88.2,102.8 60.0,89.0 31.8,102.8 36.2,71.7 14.3,49.2 45.3,43.8" fill="#ffc93c" stroke="#ff9f1c" stroke-width="10" stroke-linejoin="round"/>
+      </symbol>
+      <symbol id="i-play" viewBox="0 0 24 24">
+        <path d="M7 4.5v15a1 1 0 0 0 1.5.86l12.2-7.5a1 1 0 0 0 0-1.72L8.5 3.64A1 1 0 0 0 7 4.5z" fill="currentColor"/>
+      </symbol>
+      <symbol id="i-pause" viewBox="0 0 24 24">
+        <rect x="5" y="4" width="5" height="16" rx="1.5" fill="currentColor"/>
+        <rect x="14" y="4" width="5" height="16" rx="1.5" fill="currentColor"/>
+      </symbol>
+      <symbol id="i-restart" viewBox="0 0 24 24">
+        <path d="M19 12a7 7 0 1 1-2.05-4.95" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+        <path d="M20.5 3.5v5.5H15z" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+      </symbol>
+      <symbol id="i-clock" viewBox="0 0 24 24">
+        <circle cx="12" cy="13" r="8" fill="#fff" stroke="currentColor" stroke-width="2.5"/>
+        <path d="M12 9v4.5l3 2" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+        <rect x="9.5" y="1.5" width="5" height="3" rx="1" fill="currentColor"/>
+      </symbol>
+    </defs>
+  </svg>
   <div class="bubbles" aria-hidden="true">
     <span>1</span><span>+</span><span>7</span><span>×</span><span>3</span>
     <span>÷</span><span>9</span><span>−</span><span>5</span><span>=</span>
   </div>
 
   <header class="topbar">
-    <h1 class="logo"><span class="logo-icon">★</span>Fatos</h1>
+    <h1 class="logo"><svg class="icon logo-icon" aria-hidden="true"><use href="#i-star"/></svg>Fatos</h1>
 
     <nav class="menu" aria-label="Operações">
       <div class="ops" role="group" aria-label="Escolha as operações">
@@ -35,19 +59,19 @@
           <span class="op-symbol">÷</span><span class="op-label">Divisão</span>
         </button>
       </div>
-      <button id="start" class="start" disabled>▶ Começar</button>
+      <button id="start" class="start" disabled><svg class="icon" aria-hidden="true"><use id="start-icon" href="#i-play"/></svg><span id="start-label">Começar</span></button>
     </nav>
   </header>
 
   <section class="status" aria-live="polite">
     <div class="pill timer" title="Tempo">
-      <span class="pill-icon">⏱</span><span id="timer">00:00</span>
+      <svg class="icon pill-icon" aria-hidden="true"><use href="#i-clock"/></svg><span id="timer">00:00</span>
     </div>
     <div class="pill progress" title="Fatos">
-      <span class="pill-icon">⭐</span><span id="progress">0 / 0</span>
+      <svg class="icon pill-icon" aria-hidden="true"><use href="#i-star"/></svg><span id="progress">0 / 0</span>
     </div>
     <button id="pause" class="pill pause" disabled aria-pressed="false">
-      <span class="pill-icon" id="pause-icon">⏸</span><span id="pause-label">Pausar</span>
+      <svg class="icon pill-icon" aria-hidden="true"><use id="pause-icon" href="#i-pause"/></svg><span id="pause-label">Pausar</span>
     </button>
   </section>
 
@@ -56,7 +80,10 @@
   <main id="stage" class="stage" tabindex="0">
     <div id="card" class="card">
       <div id="welcome" class="screen">
-        <div class="mascot">🦉</div>
+        <svg class="mascot mascot-happy" viewBox="0 0 120 120" aria-hidden="true">
+          <use href="#i-star"/>
+          <circle cx="49" cy="60" r="5" fill="#2b2350"/><circle cx="71" cy="60" r="5" fill="#2b2350"/><circle cx="51" cy="58" r="1.6" fill="#fff"/><circle cx="73" cy="58" r="1.6" fill="#fff"/><circle cx="40" cy="70" r="5" fill="#ff7a45" opacity=".45"/><circle cx="80" cy="70" r="5" fill="#ff7a45" opacity=".45"/><path d="M52 70q8 8 16 0" fill="none" stroke="#2b2350" stroke-width="3.5" stroke-linecap="round"/>
+        </svg>
         <h2>Olá! Vamos praticar?</h2>
         <p>Escolha uma ou mais operações lá em cima e toque em <strong>Começar</strong>.</p>
       </div>
@@ -70,13 +97,19 @@
       </div>
 
       <div id="paused" class="screen hidden">
-        <div class="mascot">😴</div>
+        <svg class="mascot mascot-sleepy" viewBox="0 0 120 120" aria-hidden="true">
+          <use href="#i-star"/>
+          <path d="M44 61q5 4 10 0M66 61q5 4 10 0" fill="none" stroke="#2b2350" stroke-width="3.5" stroke-linecap="round"/><circle cx="40" cy="70" r="5" fill="#ff7a45" opacity=".45"/><circle cx="80" cy="70" r="5" fill="#ff7a45" opacity=".45"/><ellipse cx="60" cy="73" rx="3.5" ry="2.5" fill="#2b2350"/><text x="92" y="30" font-size="18" font-weight="800" fill="#6a4ee0" font-family="inherit">z</text><text x="103" y="16" font-size="13" font-weight="800" fill="#6a4ee0" font-family="inherit">z</text>
+        </svg>
         <h2>Pausado</h2>
         <p>Toque em <strong>Continuar</strong> quando estiver pronto.</p>
       </div>
 
       <div id="done" class="screen hidden">
-        <div class="mascot">🏆</div>
+        <svg class="mascot mascot-party" viewBox="0 0 120 120" aria-hidden="true">
+          <use href="#i-star"/>
+          <path d="M44 60q5 -5 10 0M66 60q5 -5 10 0" fill="none" stroke="#2b2350" stroke-width="3.5" stroke-linecap="round"/><circle cx="40" cy="70" r="5" fill="#ff7a45" opacity=".45"/><circle cx="80" cy="70" r="5" fill="#ff7a45" opacity=".45"/><path d="M50 68h20q-2 12 -10 12t-10 -12z" fill="#2b2350"/><path d="M55 76q5 4 10 0" fill="#ff5e7e"/><circle cx="12" cy="20" r="4" fill="#e84393"/><rect x="100" y="24" width="7" height="7" rx="1.5" fill="#3a86ff" transform="rotate(20 103 27)"/><circle cx="108" cy="92" r="3.5" fill="#2ec27e"/><rect x="6" y="88" width="7" height="7" rx="1.5" fill="#ff7a45" transform="rotate(-25 9 91)"/>
+        </svg>
         <h2>Parabéns!</h2>
         <p>Você praticou <strong id="done-count">0</strong> fatos em <strong id="done-time">00:00</strong>.</p>
         <p>Toque em <strong>Reiniciar</strong> para jogar de novo.</p>

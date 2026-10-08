@@ -38,6 +38,8 @@
   function $(id) { return document.getElementById(id); }
   var opButtons = Array.prototype.slice.call(document.querySelectorAll(".op"));
   var startBtn = $("start");
+  var startIcon = $("start-icon");
+  var startLabel = $("start-label");
   var pauseBtn = $("pause");
   var pauseIcon = $("pause-icon");
   var pauseLabel = $("pause-label");
@@ -124,13 +126,14 @@
 
   function renderControls() {
     var inGame = state !== "idle";
-    startBtn.textContent = inGame ? "↻ Reiniciar" : "▶ Começar";
+    startIcon.setAttribute("href", inGame ? "#i-restart" : "#i-play");
+    startLabel.textContent = inGame ? "Reiniciar" : "Começar";
     startBtn.classList.toggle("restart", inGame);
 
     pauseBtn.disabled = !(state === "playing" || state === "paused");
     var isPaused = state === "paused";
     pauseBtn.setAttribute("aria-pressed", isPaused ? "true" : "false");
-    pauseIcon.textContent = isPaused ? "▶" : "⏸";
+    pauseIcon.setAttribute("href", isPaused ? "#i-play" : "#i-pause");
     pauseLabel.textContent = isPaused ? "Continuar" : "Pausar";
 
     stage.classList.toggle("playing", state === "playing" || state === "paused");
@@ -270,10 +273,8 @@
       saveSelection();
       renderOps();
 
-      // Mudou as operações no meio do jogo: recomeça com a nova seleção.
-      if (state !== "idle") {
-        if (selected.length === 0) resetToIdle(); else startGame();
-      }
+      // Mudou as operações no meio do jogo: encerra o jogo e espera um novo "Começar".
+      if (state !== "idle") resetToIdle();
     });
   });
 

@@ -1,4 +1,4 @@
-# ⭐ Fatos
+# Fatos
 
 Um jogo simples e colorido para crianças praticarem os **fatos básicos** de
 **adição, subtração, multiplicação e divisão**. Funciona no computador, no
@@ -10,7 +10,7 @@ tablet e no celular.
 
 1. No menu de cima, escolha uma ou mais operações: **Adição (+)**, **Subtração (−)**,
    **Multiplicação (×)** e **Divisão (÷)**. Elas podem ser combinadas à vontade.
-2. Toque em **▶ Começar**. O botão vira **↻ Reiniciar**.
+2. Toque em **Começar**. O botão vira **Reiniciar**.
 3. Aparece um fato, por exemplo `4 + 3 =`. Toque ou clique na tela para ver a
    resposta: `4 + 3 = 7`.
 4. Toque de novo para ir ao próximo fato.
@@ -18,7 +18,8 @@ tablet e no celular.
    O jogo também pausa sozinho quando a criança sai da aba ou do aplicativo.
 6. Ao terminar todos os fatos, aparece a tela de **Parabéns!** com o tempo total.
 
-Se as operações forem trocadas no meio do jogo, ele recomeça com a nova seleção.
+Se as operações forem trocadas no meio do jogo, o jogo para e volta à tela inicial;
+é só tocar em **Começar** de novo.
 A última seleção fica salva no navegador.
 
 ### Atalhos de teclado
@@ -69,6 +70,13 @@ and multiplication cover every pair from 0 to 10, and subtraction and division
 cover all of their inverses (no division by zero). Open `index.html` in any
 browser to play.
 
-## Licença
+## Licença e créditos
 
 Distribuído sob a licença MIT. Veja [LICENSE](LICENSE).
+
+O mascote (a estrela) e todos os ícones são desenhos SVG originais feitos para
+este projeto e estão sob a mesma licença MIT. O site não usa emojis nem imagens
+de terceiros. A única peça externa é a fonte
+[Baloo 2](https://fonts.google.com/specimen/Baloo+2), da Ek Type, distribuída
+sob a [SIL Open Font License 1.1](https://openfontlicense.org/), que permite
+uso livre, inclusive comercial.
