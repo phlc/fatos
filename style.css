@@ -194,6 +194,13 @@ button:disabled { cursor: not-allowed; }
 }
 .pill-icon { width: 1.3rem; height: 1.3rem; }
 
+.score { gap: 10px; }
+.score-right, .score-wrong { display: inline-flex; align-items: center; gap: 4px; }
+.score-right { color: #1f9d62; }
+.score-wrong { color: #e0434f; }
+.score-sep { width: 2px; align-self: stretch; background: #e3def5; border-radius: 2px; }
+.bump { animation: pop 0.4s cubic-bezier(.2, 1.6, .4, 1); }
+
 .pause { transition: transform 0.12s, background 0.2s, opacity 0.2s; }
 .pause:not(:disabled):hover { transform: translateY(-2px); }
 .pause:not(:disabled):active { transform: translateY(4px); box-shadow: 0 1px 0 rgba(0, 0, 0, 0.15); }
@@ -276,6 +283,46 @@ button:disabled { cursor: not-allowed; }
   color: var(--restart);
 }
 .count.tick { animation: pop 0.45s cubic-bezier(.2, 1.6, .4, 1); }
+
+.judge {
+  display: flex;
+  justify-content: center;
+  gap: clamp(14px, 5vw, 40px);
+  margin-top: 0.4em;
+  animation: pop 0.35s ease;
+}
+.judge-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  width: clamp(110px, 30vw, 170px);
+  padding: 10px 8px 8px;
+  border-radius: 26px;
+  color: #fff;
+  font-size: clamp(1.1rem, 3.5vw, 1.5rem);
+  font-weight: 800;
+  box-shadow: 0 8px 0 rgba(0, 0, 0, 0.2);
+  transition: transform 0.12s, box-shadow 0.12s;
+}
+.judge-btn .icon { width: clamp(2.6rem, 11vw, 4rem); height: clamp(2.6rem, 11vw, 4rem); }
+.judge-btn.right { background: var(--sub); }
+.judge-btn.wrong { background: #ef4b5c; }
+.judge-btn:hover { transform: translateY(-2px); }
+.judge-btn:active { transform: translateY(6px); box-shadow: 0 2px 0 rgba(0, 0, 0, 0.2); }
+
+.flash-right { animation: flashRight 0.45s ease; }
+.flash-wrong { animation: flashWrong 0.45s ease; }
+@keyframes flashRight {
+  30% { box-shadow: 0 16px 0 rgba(0, 0, 0, 0.18), 0 0 0 10px rgba(46, 194, 126, 0.7); }
+}
+@keyframes flashWrong {
+  20% { transform: translateX(-10px); box-shadow: 0 16px 0 rgba(0, 0, 0, 0.18), 0 0 0 10px rgba(239, 75, 92, 0.7); }
+  40% { transform: translateX(10px); }
+  60% { transform: translateX(-6px); }
+  80% { transform: translateX(4px); }
+}
 
 .hint {
   margin-top: 0.6em;

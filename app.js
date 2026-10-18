@@ -51,6 +51,10 @@
   var questionEl = $("question");
   var answerEl = $("answer");
   var hintEl = $("hint");
+  var judgeEl = $("judge");
+  var scoreRightEl = $("score-right");
+  var scoreWrongEl = $("score-wrong");
+  var cardEl = $("card");
   var screens = { welcome: $("welcome"), play: $("play"), paused: $("paused"), done: $("done"),
     countdown: $("countdown") };
   var countEl = $("count");
@@ -60,6 +64,8 @@
   var deck = [];
   var index = -1;
   var revealed = false;
+  var right = 0;
+  var wrong = 0;
   var state = "idle"; // idle | countdown | playing | paused | done
   var countdownId = null;
   var elapsed = 0;
@@ -145,8 +151,7 @@
   function renderProgress() {
     var shown = Math.max(0, Math.min(index + 1, deck.length));
     progressEl.textContent = shown + " / " + deck.length;
-    var done = index + (revealed ? 1 : 0);
-    barFill.style.width = deck.length ? (100 * Math.max(0, done) / deck.length) + "%" : "0";
+    barFill.style.width = deck.length ? (100 * (right + wrong) / deck.length) + "%" : "0";
   }
 
   function renderFact() {
@@ -155,9 +160,19 @@
     answerEl.textContent = revealed ? String(f.r) : "?";
     answerEl.classList.toggle("shown", revealed);
     factEl.style.setProperty("--op-color", OPS[f.op].color);
-    hintEl.textContent = revealed
-      ? (index + 1 < deck.length ? "Toque para o próximo" : "Toque para terminar")
-      : "Toque na tela para ver a resposta";
+    hintEl.textContent = revealed ? "Você acertou?" : "Toque na tela para ver a resposta";
+    judgeEl.classList.toggle("hidden", !revealed);
+  }
+
+  function renderScore() {
+    scoreRightEl.textContent = right;
+    scoreWrongEl.textContent = wrong;
+  }
+
+  function bump(el, cls) {
+    el.classList.remove(cls);
+    void el.offsetWidth; // reinicia a animação
+    el.classList.add(cls);
   }
 
   // ---------- Game flow ----------
@@ -170,7 +185,10 @@
     deck = [];
     index = -1;
     revealed = false;
+    right = 0;
+    wrong = 0;
     state = "countdown";
+    renderScore();
     renderTimer();
     renderProgress();
     renderControls();
@@ -222,6 +240,9 @@
     deck = [];
     index = -1;
     revealed = false;
+    right = 0;
+    wrong = 0;
+    renderScore();
     renderTimer();
     renderProgress();
     show("welcome");
@@ -238,12 +259,26 @@
     if (state === "paused") { resume(); return; }
     if (state !== "playing") return;
 
+    // Depois de ver a resposta, só os botões Acertei/Errei avançam.
     if (!revealed) {
       revealed = true;
       renderFact();
-      renderProgress();
-      return;
     }
+  }
+
+  function judge(correct) {
+    if (state !== "playing" || !revealed) return;
+    if (correct) {
+      right++;
+      bump(scoreRightEl.parentNode, "bump");
+      bump(cardEl, "flash-right");
+    } else {
+      wrong++;
+      bump(scoreWrongEl.parentNode, "bump");
+      bump(cardEl, "flash-wrong");
+    }
+    renderScore();
+    renderProgress();
 
     if (index + 1 >= deck.length) {
       finish();
@@ -262,6 +297,8 @@
     state = "done";
     renderTimer();
     $("done-count").textContent = deck.length;
+    $("done-right").textContent = right;
+    $("done-pct").textContent = Math.round(100 * right / deck.length) + "%";
     $("done-time").textContent = formatTime(elapsed);
     show("done");
     renderControls();
@@ -322,11 +359,18 @@
 
   stage.addEventListener("click", advance);
 
+  $("btn-right").addEventListener("click", function (e) { e.stopPropagation(); judge(true); });
+  $("btn-wrong").addEventListener("click", function (e) { e.stopPropagation(); judge(false); });
+
   document.addEventListener("keydown", function (e) {
     if (e.target && e.target.tagName === "BUTTON" && (e.key === " " || e.key === "Enter")) return;
-    if (e.key === " " || e.key === "Enter" || e.key === "ArrowRight") {
+    if (e.key === " " || e.key === "Enter") {
       e.preventDefault();
       advance();
+    } else if (e.key === "a" || e.key === "A") {
+      judge(true);
+    } else if (e.key === "e" || e.key === "E") {
+      judge(false);
     } else if (e.key === "p" || e.key === "P") {
       if (state === "playing") pause(); else if (state === "paused") resume();
     }

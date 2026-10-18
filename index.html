@@ -34,6 +34,12 @@
         <path d="M12 9v4.5l3 2" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
         <rect x="9.5" y="1.5" width="5" height="3" rx="1" fill="currentColor"/>
       </symbol>
+      <symbol id="i-check" viewBox="0 0 24 24">
+        <path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </symbol>
+      <symbol id="i-cross" viewBox="0 0 24 24">
+        <path d="M6.5 6.5l11 11M17.5 6.5l-11 11" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/>
+      </symbol>
     </defs>
   </svg>
   <div class="bubbles" aria-hidden="true">
@@ -70,6 +76,11 @@
     <div class="pill progress" title="Fatos">
       <svg class="icon pill-icon" aria-hidden="true"><use href="#i-star"/></svg><span id="progress">0 / 0</span>
     </div>
+    <div class="pill score" title="Placar">
+      <span class="score-right"><svg class="icon pill-icon" aria-hidden="true"><use href="#i-check"/></svg><span id="score-right">0</span></span>
+      <span class="score-sep" aria-hidden="true"></span>
+      <span class="score-wrong"><svg class="icon pill-icon" aria-hidden="true"><use href="#i-cross"/></svg><span id="score-wrong">0</span></span>
+    </div>
     <button id="pause" class="pill pause" disabled aria-pressed="false">
       <svg class="icon pill-icon" aria-hidden="true"><use id="pause-icon" href="#i-pause"/></svg><span id="pause-label">Pausar</span>
     </button>
@@ -99,6 +110,14 @@
           <span id="answer" class="answer"></span>
         </div>
         <p id="hint" class="hint">Toque na tela para ver a resposta</p>
+        <div id="judge" class="judge hidden">
+          <button id="btn-wrong" class="judge-btn wrong" aria-label="Errei">
+            <svg class="icon" aria-hidden="true"><use href="#i-cross"/></svg><span>Errei</span>
+          </button>
+          <button id="btn-right" class="judge-btn right" aria-label="Acertei">
+            <svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Acertei</span>
+          </button>
+        </div>
       </div>
 
       <div id="paused" class="screen hidden">
@@ -116,7 +135,8 @@
           <path d="M44 60q5 -5 10 0M66 60q5 -5 10 0" fill="none" stroke="#2b2350" stroke-width="3.5" stroke-linecap="round"/><circle cx="40" cy="70" r="5" fill="#ff7a45" opacity=".45"/><circle cx="80" cy="70" r="5" fill="#ff7a45" opacity=".45"/><path d="M50 68h20q-2 12 -10 12t-10 -12z" fill="#2b2350"/><path d="M55 76q5 4 10 0" fill="#ff5e7e"/><circle cx="12" cy="20" r="4" fill="#e84393"/><rect x="100" y="24" width="7" height="7" rx="1.5" fill="#3a86ff" transform="rotate(20 103 27)"/><circle cx="108" cy="92" r="3.5" fill="#2ec27e"/><rect x="6" y="88" width="7" height="7" rx="1.5" fill="#ff7a45" transform="rotate(-25 9 91)"/>
         </svg>
         <h2>Parabéns!</h2>
-        <p>Você praticou <strong id="done-count">0</strong> fatos em <strong id="done-time">00:00</strong>.</p>
+        <p>Você acertou <strong id="done-right">0</strong> de <strong id="done-count">0</strong> fatos
+          (<strong id="done-pct">0%</strong>) em <strong id="done-time">00:00</strong>.</p>
         <p>Toque em <strong>Reiniciar</strong> para jogar de novo.</p>
       </div>
     </div>

@@ -14,10 +14,12 @@ tablet e no celular.
    e o botão vira **Reiniciar**, que zera o tempo e embaralha os fatos de novo.
 3. Aparece um fato, por exemplo `4 + 3 =`. Toque ou clique na tela para ver a
    resposta: `4 + 3 = 7`.
-4. Toque de novo para ir ao próximo fato.
+4. A criança diz se acertou: toque no **✓ verde (Acertei)** ou no **✗ vermelho
+   (Errei)** para ir ao próximo fato. O **placar** lá em cima mostra os acertos e erros.
 5. Use **Pausar** para parar o cronômetro e **Continuar** para voltar.
    O jogo também pausa sozinho quando a criança sai da aba ou do aplicativo.
-6. Ao terminar todos os fatos, aparece a tela de **Parabéns!** com o tempo total.
+6. Ao terminar todos os fatos, aparece a tela de **Parabéns!** com os acertos,
+   a porcentagem e o tempo total.
 
 Se as operações forem trocadas no meio do jogo, o jogo para e volta à tela inicial;
 é só tocar em **Começar** de novo.
@@ -27,7 +29,9 @@ A última seleção fica salva no navegador.
 
 | Tecla | Ação |
 |---|---|
-| Espaço, Enter ou → | Mostrar a resposta / próximo fato |
+| Espaço ou Enter | Mostrar a resposta |
+| A | Acertei |
+| E | Errei |
 | P | Pausar / continuar |
 
 ## Fatos incluídos
