@@ -15,11 +15,16 @@ tablet e no celular.
 3. Aparece um fato, por exemplo `4 + 3 =`. Toque ou clique na tela para ver a
    resposta: `4 + 3 = 7`.
 4. A criança diz se acertou: toque no **✓ verde (Acertei)** ou no **✗ vermelho
-   (Errei)** para ir ao próximo fato. O **placar** lá em cima mostra os acertos e erros.
+   (Errei)** para ir ao próximo fato. Um fato errado **volta para o fim da fila**
+   e aparece de novo, até ser acertado.
+   O **placar** lá em cima mostra quantos fatos já foram acertados (✓) e quantos
+   foram errados e ainda vão reaparecer (✗). Quando um fato errado é acertado,
+   ele sai do ✗ e entra no ✓. O contador de fatos e a barra avançam a cada acerto.
 5. Use **Pausar** para parar o cronômetro e **Continuar** para voltar.
    O jogo também pausa sozinho quando a criança sai da aba ou do aplicativo.
-6. Ao terminar todos os fatos, aparece a tela de **Parabéns!** com os acertos,
-   a porcentagem e o tempo total.
+6. Quando todos os fatos forem acertados, aparece a tela de **Parabéns!** com o
+   tempo total, quantos foram acertados de primeira (e a porcentagem) e quantas
+   vezes a criança marcou Errei.
 
 Se as operações forem trocadas no meio do jogo, o jogo para e volta à tela inicial;
 é só tocar em **Começar** de novo.
@@ -43,7 +48,8 @@ A última seleção fica salva no navegador.
 | Multiplicação | 121 | Todas as combinações de 0 a 10 |
 | Divisão | 110 | Todas as inversas da multiplicação, sem divisão por zero |
 
-Os fatos são embaralhados e cada um aparece uma vez por rodada.
+Os fatos são embaralhados e cada um aparece uma vez por rodada; os errados
+voltam para o fim da fila até serem acertados.
 
 ## Como rodar
 
@@ -69,8 +75,10 @@ app.js       Geração dos fatos, cronômetro e lógica do jogo
 
 **Fatos** is a static web game for practising addition, subtraction,
 multiplication and division facts. Pick one or more operations, press
-**Começar** (Start), and tap the screen to reveal each answer, then tap again
-for the next fact. It has a timer, a pause button and a progress bar. Addition
+**Começar** (Start), and tap the screen to reveal each answer, then mark it
+right or wrong. Wrong facts go back to the end of the queue and come up again
+until they are answered right; the scoreboard shows facts mastered (✓) and
+facts still waiting to be retried (✗). It has a timer, a pause button and a progress bar. Addition
 and multiplication cover every pair from 0 to 10, and subtraction and division
 cover all of their inverses (no division by zero). Open `index.html` in any
 browser to play.

@@ -64,8 +64,11 @@
   var deck = [];
   var index = -1;
   var revealed = false;
-  var right = 0;
-  var wrong = 0;
+  var total = 0;   // fatos diferentes na rodada
+  var right = 0;   // fatos já acertados (saem da fila)
+  var wrong = 0;   // fatos errados que ainda vão reaparecer
+  var misses = 0;  // total de vezes que a criança marcou "Errei"
+  var firstTry = 0; // fatos acertados sem nunca terem sido errados
   var state = "idle"; // idle | countdown | playing | paused | done
   var countdownId = null;
   var elapsed = 0;
@@ -148,10 +151,11 @@
     stage.classList.toggle("playing", state === "playing" || state === "paused");
   }
 
+  // Progresso = fatos já acertados. Os errados voltam para o fim da fila,
+  // então a rodada só termina quando todos forem acertados.
   function renderProgress() {
-    var shown = Math.max(0, Math.min(index + 1, deck.length));
-    progressEl.textContent = shown + " / " + deck.length;
-    barFill.style.width = deck.length ? (100 * (right + wrong) / deck.length) + "%" : "0";
+    progressEl.textContent = right + " / " + total;
+    barFill.style.width = total ? (100 * right / total) + "%" : "0";
   }
 
   function renderFact() {
@@ -185,8 +189,11 @@
     deck = [];
     index = -1;
     revealed = false;
+    total = 0;
     right = 0;
     wrong = 0;
+    misses = 0;
+    firstTry = 0;
     state = "countdown";
     renderScore();
     renderTimer();
@@ -217,6 +224,7 @@
       if (selected.indexOf(op) !== -1) deck = deck.concat(factsFor(op));
     });
     shuffle(deck);
+    total = deck.length;
     index = 0;
     revealed = false;
     elapsed = 0;
@@ -240,8 +248,11 @@
     deck = [];
     index = -1;
     revealed = false;
+    total = 0;
     right = 0;
     wrong = 0;
+    misses = 0;
+    firstTry = 0;
     renderScore();
     renderTimer();
     renderProgress();
@@ -268,12 +279,25 @@
 
   function judge(correct) {
     if (state !== "playing" || !revealed) return;
+    var f = deck[index];
     if (correct) {
       right++;
+      if (f.missed) {
+        wrong--; // estava na fila de revisão e agora foi acertado
+        f.missed = false;
+        bump(scoreWrongEl.parentNode, "bump");
+      } else {
+        firstTry++;
+      }
       bump(scoreRightEl.parentNode, "bump");
       bump(cardEl, "flash-right");
     } else {
-      wrong++;
+      misses++;
+      if (!f.missed) {
+        wrong++;
+        f.missed = true;
+      }
+      deck.push(f); // volta para o fim da fila e reaparece depois
       bump(scoreWrongEl.parentNode, "bump");
       bump(cardEl, "flash-wrong");
     }
@@ -296,10 +320,13 @@
     stopClock();
     state = "done";
     renderTimer();
-    $("done-count").textContent = deck.length;
-    $("done-right").textContent = right;
-    $("done-pct").textContent = Math.round(100 * right / deck.length) + "%";
+    $("done-count").textContent = total;
     $("done-time").textContent = formatTime(elapsed);
+    $("done-first").textContent = firstTry;
+    $("done-pct").textContent = Math.round(100 * firstTry / total) + "%";
+    $("done-misses").textContent = misses;
+    $("done-misses-label").textContent = misses === 1 ? "vez" : "vezes";
+    $("done-retry").classList.toggle("hidden", misses === 0);
     show("done");
     renderControls();
     celebrate();

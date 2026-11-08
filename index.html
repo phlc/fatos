@@ -73,13 +73,13 @@
     <div class="pill timer" title="Tempo">
       <svg class="icon pill-icon" aria-hidden="true"><use href="#i-clock"/></svg><span id="timer">00:00</span>
     </div>
-    <div class="pill progress" title="Fatos">
+    <div class="pill progress" title="Fatos acertados / total">
       <svg class="icon pill-icon" aria-hidden="true"><use href="#i-star"/></svg><span id="progress">0 / 0</span>
     </div>
-    <div class="pill score" title="Placar">
-      <span class="score-right"><svg class="icon pill-icon" aria-hidden="true"><use href="#i-check"/></svg><span id="score-right">0</span></span>
+    <div class="pill score" title="Placar: acertados e errados que vão reaparecer">
+      <span class="score-right" title="Fatos acertados"><svg class="icon pill-icon" aria-hidden="true"><use href="#i-check"/></svg><span id="score-right">0</span></span>
       <span class="score-sep" aria-hidden="true"></span>
-      <span class="score-wrong"><svg class="icon pill-icon" aria-hidden="true"><use href="#i-cross"/></svg><span id="score-wrong">0</span></span>
+      <span class="score-wrong" title="Fatos errados que vão aparecer de novo"><svg class="icon pill-icon" aria-hidden="true"><use href="#i-cross"/></svg><span id="score-wrong">0</span></span>
     </div>
     <button id="pause" class="pill pause" disabled aria-pressed="false">
       <svg class="icon pill-icon" aria-hidden="true"><use id="pause-icon" href="#i-pause"/></svg><span id="pause-label">Pausar</span>
@@ -135,8 +135,10 @@
           <path d="M44 60q5 -5 10 0M66 60q5 -5 10 0" fill="none" stroke="#2b2350" stroke-width="3.5" stroke-linecap="round"/><circle cx="40" cy="70" r="5" fill="#ff7a45" opacity=".45"/><circle cx="80" cy="70" r="5" fill="#ff7a45" opacity=".45"/><path d="M50 68h20q-2 12 -10 12t-10 -12z" fill="#2b2350"/><path d="M55 76q5 4 10 0" fill="#ff5e7e"/><circle cx="12" cy="20" r="4" fill="#e84393"/><rect x="100" y="24" width="7" height="7" rx="1.5" fill="#3a86ff" transform="rotate(20 103 27)"/><circle cx="108" cy="92" r="3.5" fill="#2ec27e"/><rect x="6" y="88" width="7" height="7" rx="1.5" fill="#ff7a45" transform="rotate(-25 9 91)"/>
         </svg>
         <h2>Parabéns!</h2>
-        <p>Você acertou <strong id="done-right">0</strong> de <strong id="done-count">0</strong> fatos
-          (<strong id="done-pct">0%</strong>) em <strong id="done-time">00:00</strong>.</p>
+        <p>Você acertou todos os <strong id="done-count">0</strong> fatos em <strong id="done-time">00:00</strong>.</p>
+        <p><strong id="done-first">0</strong> de primeira (<strong id="done-pct">0%</strong>)<span id="done-retry">;
+          os outros voltaram para o fim da fila depois de <strong id="done-misses">0</strong>
+          <span id="done-misses-label">vezes</span> no Errei</span>.</p>
         <p>Toque em <strong>Reiniciar</strong> para jogar de novo.</p>
       </div>
     </div>
